@@ -85,11 +85,11 @@ public class PlanificationDataBase extends SQLiteOpenHelper {
 
         //Log.i("MyTAG", "hohhhhhhhhooooooooooooo");
         String query5 = "CREATE TABLE " + TABLE_NAME_INGREDIENTS_BONUS + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_ALIMENT + " INTEGER, " + COLUMN_QUANTITY + " INTEGER);";
+                COLUMN_ALIMENT + " INTEGER, " + COLUMN_QUANTITY + " INTEGER, " + COLUMN_MEAL + " TEXT);";
         db.execSQL(query5);
 
         String query6 = "CREATE TABLE " + TABLE_NAME_INGREDIENTS_MODIF + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_ALIMENT + " INTEGER, " + COLUMN_QUANTITY + " INTEGER);";
+                COLUMN_ALIMENT + " INTEGER, " + COLUMN_QUANTITY + " INTEGER, " + COLUMN_MEAL + " TEXT);";
         db.execSQL(query6);
 
     }
@@ -354,16 +354,6 @@ public class PlanificationDataBase extends SQLiteOpenHelper {
 
         db.update(TABLE_NAME_PLAN, cv, "_id=?", new String[]{row_id});
 
-    }
-
-    public Cursor getIngFromPlat(String plat){
-        String query ="SELECT _id FROM "+ TABLE_NAME_INGREDIENTS + " WHERE " +  COLUMN_MEAL + " = '" + plat + "'";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = null;
-        if (db != null){
-            cursor = db.rawQuery(query,null);
-        }
-        return cursor;
     }
 
 }

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,13 +166,13 @@ public class ListeFragment extends Fragment {
             //Log.i("MyTAG",ingredient_id);
             int indice = ing_ids.indexOf(ingredient_id);
             String aliment = ing_aliments.get(indice);
-            Log.i("MyTAG","id"+indice);
+            /*Log.i("MyTAG","id"+indice);
             Log.i("MyTAG","id"+aliment);
             Log.i("MyTAG","id"+aliment_names.toString());
             Log.i("MyTAG","id"+aliment_names.size());
             Log.i("MyTAG","id"+aliment_names.indexOf(aliment));
             Log.i("MyTAG","id"+ing_aliments.toString());
-
+            */
             String aliment_id = aliment_ids.get(aliment_names.indexOf(aliment));
             String quantité = ing_quantities.get(indice);
 
@@ -210,8 +209,8 @@ public class ListeFragment extends Fragment {
             liste_aliments_name.add(aliment_names.get(aliment_ids.indexOf(aliment_bonus_id)));
         }
 
-        Log.i("MyTAG","adapter"+liste_aliments_name.toString());
-        Log.i("MyTAG","adapter"+liste_aliments_name.toString());
+        //Log.i("MyTAG","adapter"+liste_aliments_name.toString());
+        //Log.i("MyTAG","adapter"+liste_aliments_name.toString());
         myAdapter = new MyListeAdapter(this, myRecyclerView, getContext(), ing_bonus_ids, liste_images, liste_aliments_name, liste_quantités);
         //Log.i("MyTAG",getContext().toString());
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -303,7 +302,7 @@ public class ListeFragment extends Fragment {
             while (cursor.moveToNext()) {
                 ing_ids.add(cursor.getString(0));
                 ing_aliments.add(cursor.getString(1));
-                Log.i("MyTAG",(cursor.getString(1)));
+                //Log.i("MyTAG",(cursor.getString(1)));
                 ing_quantities.add(cursor.getString(2));
                 ing_plat.add(cursor.getString(3));
             }

@@ -61,11 +61,14 @@ public class MyListeAdapter extends RecyclerView.Adapter<MyListeAdapter.MyViewHo
         holder.delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("MyTAG","helloo");
                 PlanificationDataBase mydb = new PlanificationDataBase(context);
                 if (position < liste_images.size() - liste_ing_bonus_ids.size()){
+                    Log.i("MyTAG","1");
                     mydb.addIngredientToList(PlanificationDataBase.TABLE_NAME_INGREDIENTS_MODIF,
                             liste_aliments.get(position),"0", "");
                 } else {
+                    Log.i("MyTAG","2");
                     mydb.deleteRow(PlanificationDataBase.TABLE_NAME_INGREDIENTS_BONUS,
                             liste_ing_bonus_ids.get(position-liste_images.size()+liste_ing_bonus_ids.size()));
                 }
