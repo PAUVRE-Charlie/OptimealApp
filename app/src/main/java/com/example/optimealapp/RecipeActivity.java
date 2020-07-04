@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,8 +22,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class RecipeActivity extends AppCompatActivity {
 
@@ -36,10 +35,10 @@ public class RecipeActivity extends AppCompatActivity {
     liste_aliments_name, liste_titles;
 
     private String title, image, category;
-    public static String meal_id, meal_type;
+    public static String plat_id, plat_type;
 
-    private ArrayList<String> ing_ids, ing_aliments, ing_quantities;
-    private ArrayList<String> plat_ids, plat_images, plat_titles, plat_categories, plat_ingredients;
+    private ArrayList<String> ing_ids, ing_aliments, ing_quantities, ing_plat;
+    private ArrayList<String> plat_ids, plat_images, plat_titles, plat_categories, plat_saison, plat_calories;
 
     private ArrayList<String> aliment_ids, aliment_names, aliment_images, aliment_calories;
     private MyRecipeAdapter myAdapter;
@@ -56,7 +55,7 @@ public class RecipeActivity extends AppCompatActivity {
 
         refreshDataListe();
 
-        title_plat.setText(title);
+        title_plat.setText((title.substring(0, 1).toUpperCase() + title.substring(1)));
         image_plat.setImageBitmap(loadImageFromStorageFromImageDir(image));
 
     }
@@ -66,27 +65,38 @@ public class RecipeActivity extends AppCompatActivity {
         liste_images = new ArrayList<>();
         liste_quantités = new ArrayList<>();
         liste_aliments_name = new ArrayList<>();
+        liste_ingredients_id = new ArrayList<>();
+
         //myPlanDB.deleteAllPlans();
 
         storePlanDataInArraysMeals();
         storePlanDataInArraysIngredients();
         storePlanDataInArraysAliments();
 
-        List<String> liste_ingredients_id = Arrays.asList((plat_ingredients.get(plat_ids.indexOf(meal_id))).split(","));
-        title = plat_titles.get(plat_ids.indexOf(meal_id)).replace("_","'");
-        image = plat_images.get(plat_ids.indexOf(meal_id));
-        category = plat_categories.get(plat_ids.indexOf(meal_id));
+        for (int i = 0; i<ing_plat.size();i++){
+            if (ing_plat.get(i).equals(plat_titles.get(plat_ids.indexOf(plat_id)))){
+                //Log.i("MyTAG","yeah");
+                liste_ingredients_id.add(ing_ids.get(i));
+            }
+        }
+
+
+        title = plat_titles.get(plat_ids.indexOf(plat_id)).replace("_","'");
+        image = plat_images.get(plat_ids.indexOf(plat_id));
+        category = plat_categories.get(plat_ids.indexOf(plat_id));
+
 
         for (String ingredient_id:liste_ingredients_id){
-            //Log.i("MyTAG",ingredient_id);
+            Log.i("MyTAG",ingredient_id);
             int indice = ing_ids.indexOf(ingredient_id);
-            String aliment_id = ing_aliments.get(indice);
+            Log.i("MyTAG","indice"+indice);
+            String aliment = ing_aliments.get(indice);
             String quantité = ing_quantities.get(indice);
 
-            liste_aliments_id.add(aliment_id);
             liste_quantités.add(quantité);
-            liste_images.add(aliment_images.get(aliment_ids.indexOf(aliment_id)));
-            liste_aliments_name.add(aliment_names.get(aliment_ids.indexOf(aliment_id)));
+            Log.i("MyTAG",aliment);
+            liste_images.add(aliment_images.get(aliment_names.indexOf(aliment)));
+            liste_aliments_name.add(aliment);
         }
 
         myAdapter = new MyRecipeAdapter(this, myRecyclerView, RecipeActivity.this,
@@ -104,7 +114,7 @@ public class RecipeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RecipeActivity.this, ChangeMealActivity.class);
                 ChangeMealActivity.category = category;
-                ChangeMealActivity.meal_type = meal_type;
+                ChangeMealActivity.meal_type = plat_type;
                 startActivity(intent);
             }
         });
@@ -116,7 +126,8 @@ public class RecipeActivity extends AppCompatActivity {
         plat_images = new ArrayList<>();
         plat_titles = new ArrayList<>();
         plat_categories = new ArrayList<>();
-        plat_ingredients = new ArrayList<>();
+        plat_saison = new ArrayList<>();
+        plat_calories = new ArrayList<>();
 
         Cursor cursor = myPlanDB.readAllDataMeals();
         //Log.i("MyTAG","hehe");
@@ -128,7 +139,8 @@ public class RecipeActivity extends AppCompatActivity {
                 plat_images.add(cursor.getString(1));
                 plat_titles.add(cursor.getString(2));
                 plat_categories.add(cursor.getString(3));
-                plat_ingredients.add(cursor.getString(4));
+                plat_saison.add(cursor.getString(4));
+                plat_calories.add(cursor.getString(5));
             }
         }
 
@@ -139,6 +151,7 @@ public class RecipeActivity extends AppCompatActivity {
         ing_ids = new ArrayList<>();
         ing_aliments = new ArrayList<>();
         ing_quantities = new ArrayList<>();
+        ing_plat = new ArrayList<>();
 
         Cursor cursor = myPlanDB.readAllDataIngredients();
         //Log.i("MyTAG","hehe");
@@ -149,6 +162,7 @@ public class RecipeActivity extends AppCompatActivity {
                 ing_ids.add(cursor.getString(0));
                 ing_aliments.add(cursor.getString(1));
                 ing_quantities.add(cursor.getString(2));
+                ing_plat.add(cursor.getString(3));
             }
         }
     }

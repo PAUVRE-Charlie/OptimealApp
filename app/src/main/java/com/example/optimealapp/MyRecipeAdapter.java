@@ -47,7 +47,8 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyRecipeAdapter.MyViewHolder holder, final int position) {
         holder.image_ImageView.setImageBitmap(loadImageFromStorageFromImageDir(liste_images.get(position)));
-        holder.name_textView.setText((liste_aliments.get(position)).replace("_","'"));
+        String str = (liste_aliments.get(position)).replace("_","'");
+        holder.name_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
         holder.quantity_textView.setText(liste_quantités.get(position));
         //Log.i("MyTAG","image "+liste_images.get(position));
         holder.delete_button.setVisibility(View.INVISIBLE);

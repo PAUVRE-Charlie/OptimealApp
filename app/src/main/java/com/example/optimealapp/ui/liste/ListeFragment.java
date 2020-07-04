@@ -28,8 +28,6 @@ import com.example.optimealapp.ui.calendrier.PlanificationDataBase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ListeFragment extends Fragment {
 
@@ -44,11 +42,11 @@ public class ListeFragment extends Fragment {
 
     private ArrayList<String> aliment_ids, aliment_names, aliment_calories, aliment_images;
 
-    private ArrayList<String> ing_ids, ing_aliments, ing_quantities;
-    private ArrayList<String> ing_bonus_ids, ing_bonus_aliments, ing_bonus_quantities;
-    private ArrayList<String> ing_modifs_ids, ing_modifs_aliments, ing_modifs_quantities;
+    private ArrayList<String> ing_ids, ing_aliments, ing_quantities, ing_plat;
+    private ArrayList<String> ing_bonus_ids, ing_bonus_aliments, ing_bonus_quantities, ing_bonus_plat;
+    private ArrayList<String> ing_modifs_ids, ing_modifs_aliments, ing_modifs_quantities, ing_modif_plat;
 
-    private ArrayList<String> plat_ids, plat_titles, plat_categories, plat_ingredients, plat_images;
+    private ArrayList<String> plat_ids, plat_titles, plat_categories, plat_images, plat_saison, plat_calories;
 
     private ArrayList<String> plan_ids, plan_users, plan_dates, plan_ptitdejs, plan_collations, plan_dejentrees
             , plan_dejplats, plan_dejdesserts, plan_gouters, plan_dinerentrees, plan_dinerplats, plan_dinerdesserts;
@@ -96,11 +94,9 @@ public class ListeFragment extends Fragment {
             public void onClick(View v) {
                 if (!name_editText.getText().toString().trim().equals("") &&
                         !quantity_editText.getText().toString().trim().equals("")){
-                    Log.i("MyTAG", "messaaagee "+name_editText.getText().toString());
-                    Log.i("MyTAG", "messaaagee2 "+quantity_editText.getText().toString());
-                    myPlanDB.addIngredientToList(PlanificationDataBase.TABLE_NAME_INGREDIENTS_BONUS,
+                            myPlanDB.addIngredientToList(PlanificationDataBase.TABLE_NAME_INGREDIENTS_BONUS,
                             name_editText.getText().toString().trim(),
-                            quantity_editText.getText().toString().trim());
+                            quantity_editText.getText().toString().trim(), "");
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         refreshDataListe();
                         myRecyclerView.scrollToPosition(liste_aliments_id.size()-1);
@@ -122,7 +118,6 @@ public class ListeFragment extends Fragment {
         liste_images = new ArrayList<>();
         liste_quantités = new ArrayList<>();
         liste_aliments_name = new ArrayList<>();
-        //myPlanDB.deleteAllPlans();
         storePlanDataInArraysPlan();
         storePlanDataInArraysMeals();
         storePlanDataInArraysIngredients();
@@ -151,20 +146,35 @@ public class ListeFragment extends Fragment {
             }
 
         }
+        //Log.i("MyTAG","liste"+liste_plats_id.toString());
+        /*Log.i("MyTAG","ing"+ing_plat.toString());
+        Log.i("MyTAG","ing"+ing_plat.size());*/
         for (String plat_id: liste_plats_id){
             if (!plat_id.equals("0")) {
-                List<String> ingredients_ids = Arrays.asList((plat_ingredients.get(plat_ids.indexOf(plat_id))).split(","));
-                for (String ingredient_id : ingredients_ids) {
-                    liste_ingredients_id.add(ingredient_id);
+                /*Log.i("MyTAG","yes"+plat_id);
+                Log.i("MyTAG","yes"+ing_plat.toString());
+                Log.i("MyTAG","yes"+plat_titles.get(plat_ids.indexOf(plat_id)));*/
+                for (int i = 0; i<ing_plat.size();i++){
+                    if (ing_plat.get(i).equals(plat_titles.get(plat_ids.indexOf(plat_id)))){
+                        //Log.i("MyTAG","yeah");
+                        liste_ingredients_id.add(ing_ids.get(i));
+                    }
                 }
             }
-
         }
-
+        //Log.i("MyTAG", "liste"+liste_ingredients_id.toString());
         for (String ingredient_id:liste_ingredients_id){
             //Log.i("MyTAG",ingredient_id);
             int indice = ing_ids.indexOf(ingredient_id);
-            String aliment_id = ing_aliments.get(indice);
+            String aliment = ing_aliments.get(indice);
+            Log.i("MyTAG","id"+indice);
+            Log.i("MyTAG","id"+aliment);
+            Log.i("MyTAG","id"+aliment_names.toString());
+            Log.i("MyTAG","id"+aliment_names.size());
+            Log.i("MyTAG","id"+aliment_names.indexOf(aliment));
+            Log.i("MyTAG","id"+ing_aliments.toString());
+
+            String aliment_id = aliment_ids.get(aliment_names.indexOf(aliment));
             String quantité = ing_quantities.get(indice);
 
             if (liste_aliments_id.contains(aliment_id)){
@@ -200,6 +210,8 @@ public class ListeFragment extends Fragment {
             liste_aliments_name.add(aliment_names.get(aliment_ids.indexOf(aliment_bonus_id)));
         }
 
+        Log.i("MyTAG","adapter"+liste_aliments_name.toString());
+        Log.i("MyTAG","adapter"+liste_aliments_name.toString());
         myAdapter = new MyListeAdapter(this, myRecyclerView, getContext(), ing_bonus_ids, liste_images, liste_aliments_name, liste_quantités);
         //Log.i("MyTAG",getContext().toString());
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -256,7 +268,8 @@ public class ListeFragment extends Fragment {
         plat_images = new ArrayList<>();
         plat_titles = new ArrayList<>();
         plat_categories = new ArrayList<>();
-        plat_ingredients = new ArrayList<>();
+        plat_saison = new ArrayList<>();
+        plat_calories = new ArrayList<>();
 
         Cursor cursor = myPlanDB.readAllDataMeals();
         //Log.i("MyTAG","hehe");
@@ -268,7 +281,8 @@ public class ListeFragment extends Fragment {
                 plat_images.add(cursor.getString(1));
                 plat_titles.add(cursor.getString(2));
                 plat_categories.add(cursor.getString(3));
-                plat_ingredients.add(cursor.getString(4));
+                plat_saison.add(cursor.getString(4));
+                plat_calories.add(cursor.getString(5));
             }
         }
 
@@ -279,6 +293,7 @@ public class ListeFragment extends Fragment {
         ing_ids = new ArrayList<>();
         ing_aliments = new ArrayList<>();
         ing_quantities = new ArrayList<>();
+        ing_plat = new ArrayList<>();
 
         Cursor cursor = myPlanDB.readAllDataIngredients();
         //Log.i("MyTAG","hehe");
@@ -288,7 +303,9 @@ public class ListeFragment extends Fragment {
             while (cursor.moveToNext()) {
                 ing_ids.add(cursor.getString(0));
                 ing_aliments.add(cursor.getString(1));
+                Log.i("MyTAG",(cursor.getString(1)));
                 ing_quantities.add(cursor.getString(2));
+                ing_plat.add(cursor.getString(3));
             }
         }
     }

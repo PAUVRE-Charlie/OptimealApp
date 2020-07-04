@@ -53,7 +53,8 @@ public class MyListeAdapter extends RecyclerView.Adapter<MyListeAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyListeAdapter.MyViewHolder holder, final int position) {
         holder.image_ImageView.setImageBitmap(loadImageFromStorageFromImageDir(liste_images.get(position)));
-        holder.name_textView.setText((liste_aliments.get(position)).replace("_","'"));
+        String str = (liste_aliments.get(position)).replace("_","'");
+        holder.name_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
         holder.quantity_textView.setText(liste_quantités.get(position));
         //Log.i("MyTAG","image "+liste_images.get(position));
         holder.delete_button.setVisibility(View.VISIBLE);
@@ -63,7 +64,7 @@ public class MyListeAdapter extends RecyclerView.Adapter<MyListeAdapter.MyViewHo
                 PlanificationDataBase mydb = new PlanificationDataBase(context);
                 if (position < liste_images.size() - liste_ing_bonus_ids.size()){
                     mydb.addIngredientToList(PlanificationDataBase.TABLE_NAME_INGREDIENTS_MODIF,
-                            liste_aliments.get(position),"0");
+                            liste_aliments.get(position),"0", "");
                 } else {
                     mydb.deleteRow(PlanificationDataBase.TABLE_NAME_INGREDIENTS_BONUS,
                             liste_ing_bonus_ids.get(position-liste_images.size()+liste_ing_bonus_ids.size()));

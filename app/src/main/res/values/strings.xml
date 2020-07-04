@@ -19,7 +19,7 @@
     <string name="calendrier_generate_number_text">0</string>
     <string name="calendrier_days_text">jour</string>
     <string name="calendrier_generate_from_text">à partir de ce jour</string>
-    <string name="plan_helloworld">[vide]</string>
+    <string name="plan_helloworld"> </string>
     <string name="plan_ptitdej_text">Petit déjeuner</string>
     <string name="plan_collation_text">Collation</string>
     <string name="plan_dej_text">Déjeuner</string>

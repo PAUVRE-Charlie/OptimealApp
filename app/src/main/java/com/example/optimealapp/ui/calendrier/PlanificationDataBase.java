@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -37,11 +38,13 @@ public class PlanificationDataBase extends SQLiteOpenHelper {
     private static String COLUMN_IMAGE_PLAT = "Images";
     private static String COLUMN_TITLE = "Titre";
     private static String COLUMN_CATEGORIE = "Catégorie";
-    private static String COLUMN_INGREDIENTS = "Ingrédients";
+    private static String COLUMN_SAISON = "Saison";
+    private static String COLUMN_CALORIES_PLAT = "Calories";
 
     public static final String TABLE_NAME_INGREDIENTS = "Ingrédients";
-    private static String COLUMN_ALIMENT = "Aliment_id";
+    private static String COLUMN_ALIMENT = "Aliment";
     private static String COLUMN_QUANTITY = "Quantité";
+    private static String COLUMN_MEAL = "Plat";
 
     public static final String TABLE_NAME_ALIMENTS = "Aliments";
     private static String COLUMN_NAME = "Nom";
@@ -68,12 +71,12 @@ public class PlanificationDataBase extends SQLiteOpenHelper {
         db.execSQL(query);
 
         String query2 = "CREATE TABLE " + TABLE_NAME_PLATS + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_IMAGE_PLAT + " TEXT, " + COLUMN_TITLE + " TEXT, " + COLUMN_CATEGORIE + " TEXT, " + COLUMN_INGREDIENTS +
-                " TEXT);";
+                COLUMN_IMAGE_PLAT + " TEXT, " + COLUMN_TITLE + " TEXT, " + COLUMN_CATEGORIE + " TEXT, " + COLUMN_SAISON +
+                " TEXT, " + COLUMN_CALORIES_PLAT  + " TEXT);";
         db.execSQL(query2);
 
         String query3 = "CREATE TABLE " + TABLE_NAME_INGREDIENTS + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_ALIMENT + " INTEGER, " + COLUMN_QUANTITY + " INTEGER);";
+                COLUMN_ALIMENT + " INTEGER, " + COLUMN_QUANTITY + " INTEGER, " + COLUMN_MEAL + " TEXT);";
         db.execSQL(query3);
 
         String query4 = "CREATE TABLE " + TABLE_NAME_ALIMENTS + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -194,6 +197,7 @@ public class PlanificationDataBase extends SQLiteOpenHelper {
                                       Boolean dej_entree, Boolean dej_plat, Boolean dej_dessert,
                                       Boolean gouter, Boolean diner_entree, Boolean diner_plat,
                                       Boolean diner_dessert){
+        Log.i("MyTAG", "GENERATE");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         Random rd = new Random();
@@ -229,6 +233,8 @@ public class PlanificationDataBase extends SQLiteOpenHelper {
             ptitdejs_ids.add(cursor_ptitdejs.getString(0));
         }
 
+        Log.i("MyTAG", "entree" + entrees_ids);
+        Log.i("MyTAG", "entree" + dej_entree);
         for (int i=0; i<N; i++){
             cv.put(COLUMN_USER, Integer.toString(user.getId()));
             cv.put(COLUMN_DATE, date.toString());
@@ -298,11 +304,10 @@ public class PlanificationDataBase extends SQLiteOpenHelper {
         long result = db.insert(TABLE_NAME_ALIMENTS,null, cv);
     }
 
-    public void addIngredientToList(String table_name, String aliment, String quantité){
+    public void addIngredientToList(String table_name, String aliment, String quantité, String plat){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String id;
-        //Log.i("MyTAG","text "+aliment);
         aliment = aliment.replace("'","_");
         Cursor cursor = db.rawQuery("SELECT _id FROM "+ TABLE_NAME_ALIMENTS + " WHERE " +  COLUMN_NAME + " = '" + aliment + "'", null);
         if (cursor.moveToNext()) {
@@ -316,6 +321,7 @@ public class PlanificationDataBase extends SQLiteOpenHelper {
         }
         cv.put(COLUMN_ALIMENT, Integer.parseInt(id));
         cv.put(COLUMN_QUANTITY, Integer.parseInt(quantité));
+        cv.put(COLUMN_MEAL, plat);
 
         long result = db.insert(table_name,null, cv);
 /*
@@ -348,6 +354,16 @@ public class PlanificationDataBase extends SQLiteOpenHelper {
 
         db.update(TABLE_NAME_PLAN, cv, "_id=?", new String[]{row_id});
 
+    }
+
+    public Cursor getIngFromPlat(String plat){
+        String query ="SELECT _id FROM "+ TABLE_NAME_INGREDIENTS + " WHERE " +  COLUMN_MEAL + " = '" + plat + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query,null);
+        }
+        return cursor;
     }
 
 }

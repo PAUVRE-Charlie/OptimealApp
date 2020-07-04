@@ -69,9 +69,9 @@ public class CalendrierFragment extends DialogFragment {
 
     private ArrayList<String> aliment_ids, aliment_names, aliment_calories, aliment_images;
 
-    private ArrayList<String> ing_ids, ing_aliments, ing_quantities;
+    private ArrayList<String> ing_ids, ing_aliments, ing_quantities, ing_plat;
 
-    private ArrayList<String> plat_ids, plat_titles, plat_categories, plat_ingredients, plat_images;
+    private ArrayList<String> plat_ids, plat_titles, plat_categories, plat_images, plat_saison, plat_calories;
 
     private ArrayList<String> plan_ids, plan_users, plan_dates, plan_ptitdejs, plan_collations, plan_dejentrees
             , plan_dejplats, plan_dejdesserts, plan_gouters, plan_dinerentrees, plan_dinerplats, plan_dinerdesserts;
@@ -115,8 +115,8 @@ public class CalendrierFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), RecipeActivity.class);
                 startActivity(intent);
-                RecipeActivity.meal_id = ptitdej_id;
-                RecipeActivity.meal_type = PlanificationDataBase.COLUMN_PTITDEJ;
+                RecipeActivity.plat_id = ptitdej_id;
+                RecipeActivity.plat_type = PlanificationDataBase.COLUMN_PTITDEJ;
             }
         });
 
@@ -125,8 +125,8 @@ public class CalendrierFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), RecipeActivity.class);
                 startActivity(intent);
-                RecipeActivity.meal_id = collation_id;
-                RecipeActivity.meal_type = PlanificationDataBase.COLUMN_COLLATION;
+                RecipeActivity.plat_id = collation_id;
+                RecipeActivity.plat_type = PlanificationDataBase.COLUMN_COLLATION;
             }
         });
 
@@ -135,8 +135,8 @@ public class CalendrierFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), RecipeActivity.class);
                 startActivity(intent);
-                RecipeActivity.meal_id = dej_entree_id;
-                RecipeActivity.meal_type = PlanificationDataBase.COLUMN_DEJENTREE;
+                RecipeActivity.plat_id = dej_entree_id;
+                RecipeActivity.plat_type = PlanificationDataBase.COLUMN_DEJENTREE;
             }
         });
 
@@ -145,8 +145,8 @@ public class CalendrierFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), RecipeActivity.class);
                 startActivity(intent);
-                RecipeActivity.meal_id = dej_plat_id;
-                RecipeActivity.meal_type = PlanificationDataBase.COLUMN_DEJPLAT;
+                RecipeActivity.plat_id = dej_plat_id;
+                RecipeActivity.plat_type = PlanificationDataBase.COLUMN_DEJPLAT;
             }
         });
 
@@ -155,8 +155,8 @@ public class CalendrierFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), RecipeActivity.class);
                 startActivity(intent);
-                RecipeActivity.meal_id = dej_dessert_id;
-                RecipeActivity.meal_type = PlanificationDataBase.COLUMN_DEJDESSERT;
+                RecipeActivity.plat_id = dej_dessert_id;
+                RecipeActivity.plat_type = PlanificationDataBase.COLUMN_DEJDESSERT;
 
             }
         });
@@ -166,8 +166,8 @@ public class CalendrierFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), RecipeActivity.class);
                 startActivity(intent);
-                RecipeActivity.meal_id = gouter_id;
-                RecipeActivity.meal_type = PlanificationDataBase.COLUMN_GOUTER;
+                RecipeActivity.plat_id = gouter_id;
+                RecipeActivity.plat_type = PlanificationDataBase.COLUMN_GOUTER;
             }
         });
 
@@ -176,8 +176,8 @@ public class CalendrierFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), RecipeActivity.class);
                 startActivity(intent);
-                RecipeActivity.meal_id = diner_entree_id;
-                RecipeActivity.meal_type = PlanificationDataBase.COLUMN_DINERENTREE;
+                RecipeActivity.plat_id = diner_entree_id;
+                RecipeActivity.plat_type = PlanificationDataBase.COLUMN_DINERENTREE;
             }
         });
 
@@ -186,8 +186,8 @@ public class CalendrierFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), RecipeActivity.class);
                 startActivity(intent);
-                RecipeActivity.meal_id = diner_plat_id;
-                RecipeActivity.meal_type = PlanificationDataBase.COLUMN_DINERPLAT;
+                RecipeActivity.plat_id = diner_plat_id;
+                RecipeActivity.plat_type = PlanificationDataBase.COLUMN_DINERPLAT;
             }
         });
 
@@ -196,8 +196,8 @@ public class CalendrierFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), RecipeActivity.class);
                 startActivity(intent);
-                RecipeActivity.meal_id = diner_dessert_id;
-                RecipeActivity.meal_type = PlanificationDataBase.COLUMN_DINERDESSERT    ;
+                RecipeActivity.plat_id = diner_dessert_id;
+                RecipeActivity.plat_type = PlanificationDataBase.COLUMN_DINERDESSERT    ;
             }
         });
 
@@ -297,14 +297,14 @@ public class CalendrierFragment extends DialogFragment {
     }
 
     private void storePlanInTextViews(String date) {
-        //Log.i("MyTAG","date = "+date);
+        /*//Log.i("MyTAG","date = "+date);
         for (String element:plan_dates){
             //Log.i("MyTAG","element = "+element);
         }
         //Log.i("MyTAG", Integer.toString(user.getId()));
         if (plan_dates.indexOf(date)!=-1){
             //Log.i("MyTAG", plan_users.get(plan_dates.indexOf(date)));
-        }
+        }*/
 
         ptitdej_imageButton.setImageDrawable(null);
         collation_imageButton.setImageDrawable(null);
@@ -320,17 +320,45 @@ public class CalendrierFragment extends DialogFragment {
             Boolean run = true;
             for (int position=0;position<plan_dates.size();position++){
                 if((Integer.toString(user.getId())).equals(plan_users.get(position)) && plan_dates.get(position).equals(date)){
-                    //Log.i("MyTAG","yeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                    ptitdej_textView.setText(plat_titles.get(Integer.parseInt(plan_ptitdejs.get(position))));
-                    collation_textView.setText(plat_titles.get(Integer.parseInt(plan_collations.get(position))));
-                    dej_entree_textView.setText(plat_titles.get(Integer.parseInt(plan_dejentrees.get(position))));
-                    dej_plat_textView.setText(plat_titles.get(Integer.parseInt(plan_dejplats.get(position))));
-                    dej_dessert_textView.setText(plat_titles.get(Integer.parseInt(plan_dejdesserts.get(position))));
-                    gouter_textView.setText(plat_titles.get(Integer.parseInt(plan_gouters.get(position))));
-                    diner_entree_textView.setText(plat_titles.get(Integer.parseInt(plan_dinerentrees.get(position))));
-                    diner_plat_textView.setText(plat_titles.get(Integer.parseInt(plan_dinerplats.get(position))));
-                    diner_dessert_textView.setText(plat_titles.get(Integer.parseInt(plan_dinerdesserts.get(position))));
-
+                    //Log.i("MyTAG",plan_ptitdejs.toString());
+                    /*
+                    String str = plat_titles.get(plat_ids.indexOf(plan_ptitdejs.get(position)));
+                    if (!str.equals("")){
+                        ptitdej_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
+                    }
+                    str = plat_titles.get(plat_ids.indexOf(plan_collations.get(position)));
+                    if (!str.equals("")) {
+                        collation_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
+                    }
+                    str = plat_titles.get(plat_ids.indexOf(plan_dejentrees.get(position)));
+                    if (!str.equals("")){
+                        dej_entree_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
+                    }
+                    str = plat_titles.get(plat_ids.indexOf(plan_dejplats.get(position)));
+                    if (!str.equals("")){
+                        dej_plat_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
+                    }
+                    str = plat_titles.get(plat_ids.indexOf(plan_dejdesserts.get(position)));
+                    if (!str.equals("")){
+                        dej_dessert_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
+                    }
+                    str = plat_titles.get(plat_ids.indexOf(plan_gouters.get(position)));
+                    if (!str.equals("")){
+                        gouter_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
+                    }
+                    str = plat_titles.get(plat_ids.indexOf(plan_dinerentrees.get(position)));
+                    if (!str.equals("")){
+                        diner_entree_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
+                    }
+                    str = plat_titles.get(plat_ids.indexOf(plan_dinerplats.get(position)));
+                    if (!str.equals("")){
+                        diner_plat_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
+                    }
+                    str = plat_titles.get(plat_ids.indexOf(plan_dinerdesserts.get(position)));
+                    if (!str.equals("")){
+                        diner_dessert_textView.setText((str.substring(0, 1).toUpperCase() + str.substring(1)));
+                    }
+                    */
                     ptitdej_id = plan_ptitdejs.get(position);
                     collation_id = plan_collations.get(position);
                     dej_entree_id = plan_dejentrees.get(position);
@@ -459,7 +487,8 @@ public class CalendrierFragment extends DialogFragment {
         plat_images = new ArrayList<>();
         plat_titles = new ArrayList<>();
         plat_categories = new ArrayList<>();
-        plat_ingredients = new ArrayList<>();
+        plat_saison = new ArrayList<>();
+        plat_calories = new ArrayList<>();
 
         Cursor cursor = myPlanDB.readAllDataMeals();
         //Log.i("MyTAG","hehe");
@@ -471,7 +500,8 @@ public class CalendrierFragment extends DialogFragment {
                 plat_images.add(cursor.getString(1));
                 plat_titles.add(cursor.getString(2));
                 plat_categories.add(cursor.getString(3));
-                plat_ingredients.add(cursor.getString(4));
+                plat_saison.add(cursor.getString(4));
+                plat_calories.add(cursor.getString(5));
             }
         }
 
@@ -482,6 +512,7 @@ public class CalendrierFragment extends DialogFragment {
         ing_ids = new ArrayList<>();
         ing_aliments = new ArrayList<>();
         ing_quantities = new ArrayList<>();
+        ing_plat = new ArrayList<>();
 
         Cursor cursor = myPlanDB.readAllDataIngredients();
         //Log.i("MyTAG","hehe");
@@ -492,6 +523,7 @@ public class CalendrierFragment extends DialogFragment {
                 ing_ids.add(cursor.getString(0));
                 ing_aliments.add(cursor.getString(1));
                 ing_quantities.add(cursor.getString(2));
+                ing_plat.add(cursor.getString(3));
             }
         }
     }
