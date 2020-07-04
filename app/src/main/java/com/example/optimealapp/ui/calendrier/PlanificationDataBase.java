@@ -303,7 +303,7 @@ public class PlanificationDataBase extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         String id;
         //Log.i("MyTAG","text "+aliment);
-        aliment.replace("'","_");
+        aliment = aliment.replace("'","_");
         Cursor cursor = db.rawQuery("SELECT _id FROM "+ TABLE_NAME_ALIMENTS + " WHERE " +  COLUMN_NAME + " = '" + aliment + "'", null);
         if (cursor.moveToNext()) {
             id = cursor.getString(0);
