@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/homeMainLayout">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:id="@+id/home_row_avatar_image"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/white"
+                android:contentDescription="@string/home_row_avatar_image_description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.08"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <ImageView
+                android:id="@+id/home_row_meal_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/home_row_meal_image_description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/home_row_avatar_image"
+                app:layout_constraintTop_toBottomOf="@+id/home_row_avatar_image"
+                app:layout_constraintVertical_bias="0.169"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <ImageButton
+                android:id="@+id/home_row_like_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="40dp"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_thumbs_up"
+                android:text=""
+                android:tint="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.286"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_row_meal_image"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/home_row_comment_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="100dp"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_comment"
+                android:text=""
+                android:tint="@android:color/black"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/home_row_like_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/home_row_dislike_button"
+                app:layout_constraintTop_toTopOf="@+id/home_row_like_button"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/home_row_like_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/home_row_like_count"
+                app:layout_constraintBottom_toBottomOf="@+id/home_row_like_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/home_row_like_button"
+                app:layout_constraintTop_toTopOf="@+id/home_row_like_button"
+                app:layout_constraintVertical_bias="0.65" />
+
+            <ImageButton
+                android:id="@+id/home_row_dislike_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_thumbs_down"
+                android:text=""
+                android:tint="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/home_row_like_button"
+                app:layout_constraintTop_toBottomOf="@+id/home_row_meal_image"
+                app:layout_constraintVertical_bias="1.0"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/home_row_dislike_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/home_row_dislike_count"
+                app:layout_constraintBottom_toBottomOf="@+id/home_row_like_count"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/home_row_dislike_button"
+                app:layout_constraintTop_toTopOf="@+id/home_row_like_count" />
+
+            <TextView
+                android:id="@+id/home_row_comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/home_row_comment_count"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/home_row_comment_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/home_row_comment_button"
+                app:layout_constraintTop_toTopOf="@+id/home_row_comment_button"
+                app:layout_constraintVertical_bias="0.461" />
+
+            <TextView
+                android:id="@+id/home_row_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_row_title"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/home_row_avatar_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.06"
+                app:layout_constraintStart_toEndOf="@+id/home_row_avatar_image"
+                app:layout_constraintTop_toTopOf="@+id/home_row_avatar_image" />
+
+            <TextView
+                android:id="@+id/home_row_meal_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:background="@android:color/white"
+                android:padding="3dp"
+                android:text="@string/home_row_meal_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textStyle="bold"
+                app:fontFamily="sans-serif-black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/home_row_meal_image"
+                app:layout_constraintStart_toStartOf="@+id/home_row_meal_image"
+                app:layout_constraintTop_toBottomOf="@+id/home_row_meal_image"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

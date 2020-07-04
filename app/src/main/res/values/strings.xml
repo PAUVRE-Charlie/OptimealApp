@@ -1,0 +1,159 @@
+<resources>
+    <string name="app_name">Optimeal</string>
+    <string name="title_home">Accueil</string>
+    <string name="title_calendrier">Calendrier</string>
+    <string name="title_liste">Liste</string>
+    <string name="title_profile">Profil</string>
+    <string name="home_row_title">Title</string>
+    <string name="home_row_meal_title">Meal</string>
+    <string name="home_row_like_count">1</string>
+    <string name="home_row_dislike_count">2</string>
+    <string name="home_row_comment_count">3</string>
+    <string name="home_row_avatar_image_description">avatar</string>
+    <string name="home_row_meal_image_description">meal image</string>
+    <string name="add_pub_meal_name">Nom du repas</string>
+    <string name="add_pub_button_text">Publier</string>
+    <string name="calendrier_change_text">Changer la date</string>
+    <string name="calendrier_reset_plans_text">Effacer toutes les planifications</string>
+    <string name="calendrier_generate_text">Générer des planifications pour </string>
+    <string name="calendrier_generate_number_text">0</string>
+    <string name="calendrier_days_text">jour</string>
+    <string name="calendrier_generate_from_text">à partir de ce jour</string>
+    <string name="plan_helloworld">[vide]</string>
+    <string name="plan_ptitdej_text">Petit déjeuner</string>
+    <string name="plan_collation_text">Collation</string>
+    <string name="plan_dej_text">Déjeuner</string>
+    <string name="plan_gouter_text">Goûter</string>
+    <string name="plan_diner_text">Dîner</string>
+    <string name="liste_row_name_text">Nom</string>
+    <string name="liste_row_quantity_text">Quantité</string>
+    <string name="liste_reset_text">Reset</string>
+    <string name="liste_livraison_text">Livraison</string>
+    <string name="livraison_total_text">Total :</string>
+    <string name="livraison_user_text">A: </string>
+    <string name="livraison_adresse_text">Adresse: </string>
+    <string name="livraison_numero_carte_text">Numéro de carte: </string>
+    <string name="livraison_date_expiration_text">Date d\'expiration: </string>
+    <string name="livraison_cryptogramme_text">Cryptogramme visuel: </string>
+    <string name="profil_name_text">Nom:</string>
+    <string name="profil_firstname_text">Prénom:</string>
+    <string name="profil_age_text">Age:</string>
+    <string name="profil_gender_text">Sexe:</string>
+    <string name="profil_height_text">Taille:</string>
+    <string name="profil_weight_text">Poids:</string>
+    <string name="profil_adresse_text">Adresse:</string>
+    <string name="profil_sportif_text">Sportif</string>
+    <string name="profil_nombre_text">Nombre de personnes à nourrir:</string>
+    <string name="profil_email_text">Email:</string>
+    <string name="profil_logout_text">Se déconnecter</string>
+    <string name="login_button_text">Se connecter ou s\'inscrire</string>
+    <string name="login_email_text">Email</string>
+    <string name="login_password_text">Mot de passe</string>
+    <string name="login_stay_connected_text">Rester connecté</string>
+    <string name="login_preference_stay_connected_boolean">stay_connected_boolean</string>
+    <string name="login_preference_last_user_id">last_user</string>
+    <string name="login_preference_file_key">preference_file_log</string>
+    <string name="inscription_prenom_text">Prénom</string>
+    <string name="inscription_nom_text">Nom</string>
+    <string name="inscription_age_text">Age</string>
+    <string name="inscription_taille_text">Taille</string>
+    <string name="inscription_poids_text">Poids</string>
+    <string name="inscription_email_text">Email</string>
+    <string name="inscription_adresse_text">Adresse</string>
+    <string name="inscription_nombre_text">Nombre</string>
+    <string name="inscription_sportif_text">Mode de vie:</string>
+    <string name="inscription_regime_text">Type de régime:</string>
+    <string name="inscription_mdp_text">Mot de passe</string>
+    <string name="inscription_kg_text">kg</string>
+    <string name="inscription_m_text">m</string>
+    <string name="inscription_switch_on_text">Homme</string>
+    <string name="inscription_switch_off_text">Femme</string>
+    <string name="inscription_connexion_text">S\'inscrire</string>
+    <string name="generer_button_text">Générer</string>
+    <string name="generer_ptitdej_text">Petit déjeuner</string>
+    <string name="generer_collation_text">Collation</string>
+    <string name="generer_dej_entree_text">Déjeuner - Entrée</string>
+    <string name="generer_dej_plat_text">Déjeuner - Plat</string>
+    <string name="generer_dej_dessert_text">Déjeuner - Dessert</string>
+    <string name="generer_gouter_text">Goûter</string>
+    <string name="generer_diner_entree_text">Dîner - Entrée</string>
+    <string name="generer_diner_plat_text">Dîner - Plat</string>
+    <string name="generer_diner_dessert_text">Dîner - Dessert</string>
+    <string name="generer_a_partir_de_text">à partir de:</string>
+    <string name="recipe_ingredient_text">Ingrédients:</string>
+
+    <string name="blank"> </string>
+
+
+    <string-array name="sportif_array">
+        <item>Sédentaire</item>
+        <item>Sportif occasionel</item>
+        <item>Sportif régulier</item>
+        <item>Sportif professionnel</item>
+    </string-array>
+    <string-array name="regime_array">
+        <item>Normal</item>
+        <item>Perte de poids</item>
+        <item>Prise de masse</item>
+    </string-array>
+    <string-array name="genre_array">
+        <item>Femme</item>
+        <item>Homme</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="month_array">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <string-array name="year_array">
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+        <item>2028</item>
+        <item>2029</item>
+        <item>2030</item>
+        <item>2031</item>
+        <item>2032</item>
+        <item>2033</item>
+        <item>2034</item>
+        <item>2035</item>
+        <item>2036</item>
+        <item>2037</item>
+        <item>2038</item>
+        <item>2039</item>
+        <item>2040</item>
+        <item>2041</item>
+        <item>2042</item>
+        <item>2043</item>
+        <item>2044</item>
+        <item>2045</item>
+        <item>2046</item>
+        <item>2047</item>
+        <item>2048</item>
+        <item>2049</item>
+        <item>2050</item>
+        <item>2051</item>
+    </string-array>
+
+    <string name="font">sans-serif-medium</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

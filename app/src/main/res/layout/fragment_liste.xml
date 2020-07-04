@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/calendrier_line_ptitdej"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:alpha="0.05"
+        app:cardBackgroundColor="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/liste_recycler_view"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/liste_recycler_view"
+        android:layout_width="373dp"
+        android:layout_height="570dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/liste_add_name_editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/liste_reset_imageButton"
+        android:layout_width="45dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="80dp"
+        android:background="@android:color/white"
+        android:tint="@color/colorPressed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.71"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/stat_notify_sync"
+        tools:ignore="ContentDescription" />
+
+    <EditText
+        android:id="@+id/liste_add_quantity_editText"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:shadowColor="@color/colorAccent"
+        android:ems="10"
+        android:hint="@string/liste_row_quantity_text"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/liste_add_name_editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toEndOf="@+id/liste_add_name_editText"
+        app:layout_constraintTop_toTopOf="@+id/liste_add_name_editText" />
+
+    <EditText
+        android:id="@+id/liste_add_name_editText"
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/liste_row_name_text"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/liste_reset_imageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.97" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/list_add_floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/colorPrimary"
+        app:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/liste_add_quantity_editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/liste_add_quantity_editText"
+        app:layout_constraintTop_toTopOf="@+id/liste_add_quantity_editText"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <TextView
+        android:id="@+id/liste_reset_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/liste_reset_text"
+        app:layout_constraintBottom_toBottomOf="@+id/liste_reset_imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/liste_reset_imageButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/liste_reset_imageButton" />
+
+    <Button
+        android:id="@+id/liste_livraison_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPressed"
+        android:text="@string/liste_livraison_text"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/liste_reset_imageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/liste_reset_imageButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
